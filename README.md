@@ -92,10 +92,10 @@ pytest -v
 cd Sweet_Shop_Management_System/frontend
 
 2️⃣ Install Dependencies
-npm install
+@ npm install
 
 4️⃣ Start Frontend Server
-npm run dev
+@ npm run dev
 
 # My AI Usage
 
