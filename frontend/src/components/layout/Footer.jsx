@@ -16,7 +16,7 @@ export default function Footer() {
           
           <div className="text-center">
             <p className="text-gray-600 flex items-center justify-center">
-              Made with <Heart className="w-4 h-4 text-red-500 mx-1" /> by Sweet Shop Team
+              Made with <Heart className="w-4 h-4 text-red-500 mx-1" /> by Sweet Shop
             </p>
             <p className="text-sm text-gray-500 mt-2">
               © {new Date().getFullYear()} Sweet Shop Management System. All rights reserved.

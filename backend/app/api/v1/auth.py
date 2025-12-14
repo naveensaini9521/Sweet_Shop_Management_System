@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from typing import Optional
 import logging
 
-# Correct imports - use app.core.dependencies
 from app.core.dependencies import get_current_user, admin_required
 from app.services.auth_service import register_user, authenticate_user, create_access_token
 from app.core.database import get_database
@@ -36,24 +35,23 @@ class UserProfile(BaseModel):
     is_active: bool
     created_at: datetime
 
+
 @router.post("/register", response_model=Token)
 async def register(data: UserRegister):
-    """Register a new user"""
     try:
         db = get_database()
         user = await register_user(db, data.email, data.password, data.username)
-        
-        if not user:
+
+        if user is None:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="User registration failed"
+                detail="User already exists"
             )
-        
-        # Create access token
+
         access_token = create_access_token(
             data={"sub": str(user["_id"])}
         )
-        
+
         return {
             "access_token": access_token,
             "refresh_token": access_token,
@@ -65,13 +63,13 @@ async def register(data: UserRegister):
                 "is_admin": user.get("is_admin", False)
             }
         }
-    
+
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Registration error: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal server error"
-        )
+        raise HTTPException(500, "Internal server error")
+
 
 @router.post("/login", response_model=Token)
 async def login(data: UserLogin):
