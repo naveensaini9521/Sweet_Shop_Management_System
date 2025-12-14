@@ -1,4 +1,3 @@
-# backend/app/api/v1/inventory.py
 from fastapi import APIRouter, Depends, Query, HTTPException, status
 from typing import List, Optional
 from datetime import datetime, timedelta

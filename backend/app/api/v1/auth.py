@@ -1,4 +1,3 @@
-# backend/app/api/v1/auth.py
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime, timedelta

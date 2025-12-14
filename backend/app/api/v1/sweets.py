@@ -1,4 +1,3 @@
-# backend/app/api/v1/sweets.py
 from fastapi import APIRouter, Depends, Query, HTTPException, status
 from typing import List, Optional
 import logging
