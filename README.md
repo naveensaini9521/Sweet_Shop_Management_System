@@ -66,36 +66,36 @@ Make sure you have the following installed:
    - Git
 
 # Backend Setup
-1️⃣ Navigate to Backend Directory
+# 1️⃣ Navigate to Backend Directory
 cd Sweet_Shop_Management_System/backend
 
-2️⃣ Create Virtual Environment
+#2️⃣ Create Virtual Environment
 python3 -m venv venv
 
-3️⃣ Activate Virtual Environment
+# 3️⃣ Activate Virtual Environment
 
 Linux / macOS
 
 source venv/bin/activate
 
-4️⃣ Install Dependencies
+# 4️⃣ Install Dependencies
 pip install -r requirements.txt
 
-6️⃣ Run Backend Server
+#6️⃣ Run Backend Server
 uvicorn app.main:app --reload
 
 Run Backend Tests;-
 pytest -v
 
 # 🌐 Frontend Setup (React + Vite)
-1️⃣ Navigate to Frontend Directory
-cd Sweet_Shop_Management_System/frontend
+   # 1️⃣ Navigate to Frontend Directory
+        cd Sweet_Shop_Management_System/frontend
 
-2️⃣ Install Dependencies
-@ npm install
+   # 2️⃣ Install Dependencies
+     npm install
 
-4️⃣ Start Frontend Server
-@ npm run dev
+  #  4️⃣ Start Frontend Server
+        npm run dev
 
 # My AI Usage
 
