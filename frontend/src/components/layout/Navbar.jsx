@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { ShoppingBag, User, LogOut, Settings } from 'lucide-react'
+import { ShoppingBag, User, LogOut, Settings, Shield } from 'lucide-react'
 
 export default function Navbar() {
   const { user, logout, isAdmin } = useAuth()
@@ -42,9 +42,10 @@ export default function Navbar() {
             
             {isAdmin() && (
               <Link 
-                to="/admin" 
-                className="text-gray-600 hover:text-pink-600 font-medium"
+                to="/admin/dashboard" 
+                className="flex items-center text-gray-600 hover:text-purple-600 font-medium"
               >
+                <Shield className="w-4 h-4 mr-1" />
                 Admin
               </Link>
             )}

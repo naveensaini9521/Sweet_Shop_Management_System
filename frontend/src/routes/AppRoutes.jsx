@@ -1,4 +1,3 @@
-// frontend/src/routes/AppRoutes.jsx
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import PrivateRoute from './PrivateRoute'
@@ -153,6 +152,12 @@ export default function AppRoutes() {
       } />
       
       {/* Admin Routes - Only accessible to admin users */}
+      
+      <Route path="/admin" element={
+        <PrivateRoute adminOnly>
+          <Navigate to="/admin/dashboard" replace />
+        </PrivateRoute>
+      } />
       
       {/* Admin Dashboard (Main admin page) */}
       <Route path="/admin/dashboard" element={
