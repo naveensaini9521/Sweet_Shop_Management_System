@@ -1,16 +1,24 @@
-// frontend/src/api/inventory.js
-import api from './axios'
+import api from './axios';
 
-export const inventoryAPI = {
+const inventoryAPI = {
+  getInventoryStats: async () => {
+    return await api.get('/inventory/stats');
+  },
+
   // Get low stock items (Admin only)
-  getLowStock: (threshold = 10) => api.get(`/inventory/low-stock?threshold=${threshold}`),
-  
+  getLowStockItems: async (threshold = 10) => {
+    return await api.get(`/inventory/low-stock?threshold=${threshold}`);
+  },
+
   // Get out of stock items (Admin only)
-  getOutOfStock: () => api.get('/inventory/out-of-stock'),
-  
-  // Get inventory stats (Admin only)
-  getInventoryStats: () => api.get('/inventory/stats'),
-  
+  getOutOfStockItems: async () => {
+    return await api.get('/inventory/out-of-stock');
+  },
+
   // Bulk restock (Admin only)
-  bulkRestock: (restockData) => api.post('/inventory/bulk-restock', restockData),
-}
+  bulkRestock: async (restockData) => {
+    return await api.post('/inventory/bulk-restock', restockData);
+  }
+};
+
+export { inventoryAPI };

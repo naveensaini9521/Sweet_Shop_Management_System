@@ -95,18 +95,27 @@ export default function AdminDashboard() {
     e.preventDefault()
     try {
       const sweetData = {
-        ...formData,
+        name: formData.name,
+        category: formData.category,
         price: parseFloat(formData.price),
-        quantity: parseInt(formData.quantity)
+        quantity: parseInt(formData.quantity),
+        description: formData.description || "",
+        image_url: formData.image_url || "",
+        tags: formData.tags || [] 
       }
       
-      await sweetsAPI.createSweet(sweetData)
-      toast.success('Sweet created successfully! 🍬')
+      console.log('Creating sweet:', sweetData); 
+      
+      const response = await sweetsAPI.createSweet(sweetData);
+      console.log('Response:', response);
+      
+      toast.success(`Sweet "${sweetData.name}" created successfully! 🎉`)
       setShowCreateModal(false)
       resetForm()
-      fetchSweets()
-      fetchStats()
+      fetchSweets() 
+      fetchStats()  
     } catch (error) {
+      console.error('Creation error:', error); 
       toast.error(error.response?.data?.detail || 'Failed to create sweet')
     }
   }
@@ -124,13 +133,29 @@ export default function AdminDashboard() {
       if (formData.tags) updateData.tags = formData.tags
       
       await sweetsAPI.updateSweet(selectedSweet.id, updateData)
-      toast.success('Sweet updated successfully! ✨')
+      toast.success('Sweet updated!')
       setShowEditModal(false)
-      resetForm()
       fetchSweets()
-      fetchStats()
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Failed to update sweet')
+      toast.error(error.response?.data?.detail || 'Update failed')
+    }
+  }
+
+  const handleBulkRestock = async () => {
+    const lowStockSweets = sweets.filter(s => s.quantity <= 10)
+    if (lowStockSweets.length === 0) {
+      toast.error('No low stock items')
+      return
+    }
+    
+    try {
+      for (const sweet of lowStockSweets) {
+        await sweetsAPI.restockSweet(sweet.id, 10)
+      }
+      toast.success(`Restocked ${lowStockSweets.length} items!`)
+      fetchSweets()
+    } catch (error) {
+      toast.error('Bulk restock failed')
     }
   }
 
@@ -200,28 +225,6 @@ export default function AdminDashboard() {
       tags: sweet.tags || []
     })
     setShowEditModal(true)
-  }
-
-  const handleBulkRestock = async () => {
-    const lowStockSweets = sweets.filter(s => s.quantity <= 5)
-    if (lowStockSweets.length === 0) {
-      toast.error('No low stock items found')
-      return
-    }
-    
-    const restockData = {}
-    lowStockSweets.forEach(sweet => {
-      restockData[sweet.id] = 20 // Restock 20 each
-    })
-    
-    try {
-      await inventoryAPI.bulkRestock(restockData)
-      toast.success(`Restocked ${lowStockSweets.length} items in bulk! 🚀`)
-      fetchSweets()
-      fetchStats()
-    } catch (error) {
-      toast.error('Failed to bulk restock')
-    }
   }
 
   const getStockStatus = (quantity) => {

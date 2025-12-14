@@ -7,7 +7,7 @@ from app.core.dependencies import get_current_user, admin_required
 from app.services.sweet_service import SweetService
 from app.schemas.sweet import RestockRequest
 
-router = APIRouter(prefix="/inventory", tags=["inventory"])
+router = APIRouter(tags=["inventory"])
 logger = logging.getLogger(__name__)
 sweet_service = SweetService()
 
