@@ -2,88 +2,29 @@
 
 A full-stack Sweet Shop Management System built with a React (Vite) frontend and Flask backend, designed to manage products, orders, users, and authentication efficiently.
 
-📁 Project Structure
+# Login as admin
+email: admin123@gmail.com
+Password: admin123
 
-Sweet_Shop_Management_System/
-│
-├── backend/
-│   ├── app/
-│   │   ├── main.py                 # FastAPI app entry
-│   │   ├── core/
-│   │   │   ├── config.py           # Settings, env vars
-│   │   │   ├── security.py         # JWT, password hashing
-│   │   │   └── dependencies.py     # Auth dependencies
-│   │   │
-│   │   ├── api/
-│   │   │   ├── v1/
-│   │   │   │   ├── auth.py         # /api/auth/*
-│   │   │   │   ├── sweets.py       # /api/sweets/*
-│   │   │   │   └── inventory.py    # purchase / restock
-│   │   │
-│   │   ├── models/
-│   │   │   ├── user.py             # User model
-│   │   │   ├── sweet.py            # Sweet model
-│   │   │   └── base.py             # Base SQLAlchemy model
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── user.py             # Pydantic schemas
-│   │   │   ├── sweet.py
-│   │   │   └── auth.py
-│   │   │
-│   │   ├── services/
-│   │   │   ├── auth_service.py     # Business logic
-│   │   │   ├── sweet_service.py
-│   │   │   └── inventory_service.py
-│   │   │
-│   │   ├── db/
-│   │   │   ├── session.py          # DB connection
-│   │   │   └── init_db.py
-│   │   │
-│   │   └── tests/
-│   │       ├── test_auth.py
-│   │       ├── test_sweets.py
-│   │       └── test_inventory.py
-│   │
-│   ├                   
-│   ├── requirements.txt
-│   ├── .env
-│   └── pytest.ini
-│
-├── frontend/
-│   ├── src/
-│   │   ├── api/
-│   │   │   └── axios.js            # API client
-│   │   │
-│   │   ├── components/
-│   │   │   ├── SweetCard.jsx
-│   │   │   ├── Navbar.jsx
-│   │   │   └── ProtectedRoute.jsx
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── Login.jsx
-│   │   │   ├── Register.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   └── AdminPanel.jsx
-│   │   │
-│   │   ├── context/
-│   │   │   └── AuthContext.jsx
-│   │   │
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
-│   ├── package.json
-│   └── vite.config.js
-│
-├── docs/
-│   ├── screenshots/
-│   └── test-report.md
-│
-├── .gitignore
-├── README.md
+# Admin menu options:
+1. View all users
+2. Create new user
+3. Reset user password
+4. Delete user account
+5. View system logs
+6. Generate access report
+7. Change admin password
+8. Logout
 
+# Login as user
+Username: user@gmail.com
+Password: user123
 
-
-
+# User menu options:
+1. View my profile
+2. Change my password
+3. View my activity
+4. Logout
 
 Frontend:-
 
