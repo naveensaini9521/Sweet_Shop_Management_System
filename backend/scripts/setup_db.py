@@ -1,4 +1,3 @@
-# backend/scripts/setup_db.py
 import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
 import logging

@@ -1,3 +1,4 @@
+// frontend/src/context/AuthContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react'
 import { authAPI } from '../api/auth'
 import { jwtDecode } from 'jwt-decode'
@@ -45,10 +46,10 @@ export const AuthProvider = ({ children }) => {
       
       // Update state
       setUser(user)
-      setIsAuthenticated(true)
       
       return { success: true, user }
     } catch (error) {
+      console.error('Login error:', error)
       return { 
         success: false, 
         error: error.response?.data?.detail || 'Login failed' 
@@ -80,12 +81,15 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('refresh_token')
     localStorage.removeItem('user')
     setUser(null)
-    window.location.href = '/login'
+    // Use navigate instead of window.location to avoid full page reload
+    if (window.location.pathname !== '/login') {
+      window.location.href = '/login'
+    }
   }
 
   const isAdmin = () => {
     return user?.is_admin === true || user?.role === 'admin'
-    }
+  }
 
   const updateUserProfile = (updatedUser) => {
     setUser(prev => ({ ...prev, ...updatedUser }))
