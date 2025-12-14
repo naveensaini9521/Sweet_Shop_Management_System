@@ -1,4 +1,3 @@
-# backend/app/models/user.py
 from datetime import datetime
 from bson import ObjectId
 from .base import Base

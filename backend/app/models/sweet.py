@@ -1,4 +1,3 @@
-# backend/app/models/sweet.py
 from datetime import datetime
 from bson import ObjectId
 from .base import Base
