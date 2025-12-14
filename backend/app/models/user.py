@@ -1,10 +1,23 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from app.db.session import Base
+# backend/app/models/user.py
+from datetime import datetime
+from bson import ObjectId
+from .base import Base
 
 class User(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    is_admin = Column(Boolean, default=False)
+    """User model for MongoDB"""
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.email = kwargs.get('email', '')
+        self.username = kwargs.get('username', '')
+        self.hashed_password = kwargs.get('hashed_password', '')
+        self.is_admin = kwargs.get('is_admin', False)
+        self.is_active = kwargs.get('is_active', True)
+        
+    @property
+    def id(self):
+        """Get string ID"""
+        return str(self._id)
+    
+    def __repr__(self):
+        return f"<User {self.email}>"

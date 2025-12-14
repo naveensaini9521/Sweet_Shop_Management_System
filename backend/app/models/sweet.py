@@ -1,11 +1,24 @@
-from sqlalchemy import Column, Integer, String, Float
-from app.db.session import Base
+# backend/app/models/sweet.py
+from datetime import datetime
+from bson import ObjectId
+from .base import Base
 
 class Sweet(Base):
-    __tablename__ = "sweets"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    category = Column(String, index=True)
-    price = Column(Float)
-    quantity = Column(Integer)
+    """Sweet model for MongoDB"""
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.name = kwargs.get('name', '')
+        self.description = kwargs.get('description', '')
+        self.category = kwargs.get('category', '')
+        self.price = kwargs.get('price', 0.0)
+        self.quantity = kwargs.get('quantity', 0)
+        self.image_url = kwargs.get('image_url', '')
+        
+    @property
+    def id(self):
+        """Get string ID"""
+        return str(self._id)
+    
+    def __repr__(self):
+        return f"<Sweet {self.name}>"
