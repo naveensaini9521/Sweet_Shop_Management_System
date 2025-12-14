@@ -23,7 +23,7 @@ A full-stack Sweet Shop Management System built with a React (Vite) frontend and
 
    - React Router
 
-#Backend
+# Backend
 
    - Python 3.10+
 
@@ -81,28 +81,29 @@ pytest -v
   #  3 Start Frontend Server
         npm run dev
 
-## Screenshots
+## 📸 Application Screenshots
 
-### Home Page
-![Home Page] (docs/screenshots/HomePage.png)
+### 🏠 Home Page
+![Home Page](docs/screenshots/HomePage.png)
 
-### Login Page
-![Login Page] (docs/screenshots/login.png)
+### 🔐 Login Page
+![Login Page](docs/screenshots/login.png)
 
-### Register Page
-![Register Page] (docs/screenshots/login.png)
+### 📝 Register Page
+![Register Page](docs/screenshots/register.png)
 
-### User Dashboard
-![User Dashboard] (docs/screenshots/login.png)
+### 👤 User Dashboard
+![User Dashboard](docs/screenshots/user-dashboard.png)
 
-### Admin Dashboard
-![Admin Dashboard] (docs/screenshots/login.png)
+### 🛠️ Admin Dashboard
+![Admin Dashboard](docs/screenshots/admin-dashboard.png)
 
-### Admin Sweet add button
-![Admin Sweet add button] (docs/screenshots/login.png)
+### ➕ Admin – Add Sweet
+![Admin Sweet Add Button](docs/screenshots/admin-add-sweet.png)
 
-### Admin Sweets
-![Admin Sweets] (docs/screenshots/login.png)
+### 🍬 Admin – Sweets List
+![Admin Sweets](docs/screenshots/admin-sweets.png)
+
 
 
 # My AI Usage
