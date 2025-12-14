@@ -1,4 +1,3 @@
-# backend/create_admin.py
 import asyncio
 import sys
 import os
