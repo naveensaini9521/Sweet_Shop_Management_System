@@ -3,28 +3,12 @@
 A full-stack Sweet Shop Management System built with a React (Vite) frontend and Flask backend, designed to manage products, orders, users, and authentication efficiently.
 
 # Login as admin
-email: admin123@gmail.com
-Password: admin123
-
-# Admin menu options:
-1. View all users
-2. Create new user
-3. Reset user password
-4. Delete user account
-5. View system logs
-6. Generate access report
-7. Change admin password
-8. Logout
+#    email: admin123@gmail.com
+ #   Password: admin123
 
 # Login as user
-Username: user@gmail.com
-Password: user123
-
-# User menu options:
-1. View my profile
-2. Change my password
-3. View my activity
-4. Logout
+#    Username: user@gmail.com
+ #   Password: user123
 
 
 # Frontend:-
