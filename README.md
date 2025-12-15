@@ -67,6 +67,9 @@ Make sure you have the following installed:
 
 #    5 Run Backend Server
         uvicorn app.main:app --reload
+        
+        uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
 
 Run Backend Tests;-
 pytest -v
