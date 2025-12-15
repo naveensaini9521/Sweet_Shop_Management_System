@@ -91,7 +91,8 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/" element={<HomeHandler />} />
+      <Route path="/" element={<Home />} />
+
       
       {/* Login - only accessible when NOT logged in */}
       <Route path="/login" element={
