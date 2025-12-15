@@ -67,12 +67,12 @@ Make sure you have the following installed:
 
 #    5 Run Backend Server
         uvicorn app.main:app --reload
-        
+
         uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 
-Run Backend Tests;-
-pytest -v
+# Run Backend Tests;-
+   pytest -v
 
 # 🌐 Frontend Setup (React + Vite)
    # 1️⃣ Navigate to Frontend Directory
@@ -84,6 +84,9 @@ pytest -v
   #  3 Start Frontend Server
         npm run dev
 
+# Use this path
+    http://localhost:3000/
+    
 ## 📸 Application Screenshots
 
 ### 🏠 Home Page
