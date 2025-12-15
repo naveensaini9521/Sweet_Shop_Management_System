@@ -70,7 +70,10 @@ Make sure you have the following installed:
 
         uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
+# Open the application in your browser:
 
+   http://127.0.0.1:8000/
+   
 # Run Backend Tests;-
    pytest -v
 
@@ -86,7 +89,7 @@ Make sure you have the following installed:
 
 # Use this path
     http://localhost:3000/
-    
+
 ## 📸 Application Screenshots
 
 ### 🏠 Home Page
