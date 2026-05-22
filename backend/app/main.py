@@ -41,11 +41,7 @@ if REACT_BUILD_PATH.exists():
     logger.info(f"Serving React app from: {REACT_BUILD_PATH}")
 
     # Mount Vite assets folder
-    app.mount(
-        "/assets",
-        StaticFiles(directory=REACT_BUILD_PATH / "assets"),
-        name="assets"
-    )
+    app.mount("/static", StaticFiles(directory=REACT_BUILD_PATH / "static"), name="static")
 
     # Root Route
     @app.get("/")
@@ -70,7 +66,7 @@ if REACT_BUILD_PATH.exists():
             return FileResponse(requested_file)
 
         # Serve assets files
-        asset_file = REACT_BUILD_PATH / "assets" / full_path
+        asset_file = REACT_BUILD_PATH / "static" / full_path
 
         if asset_file.exists() and asset_file.is_file():
             return FileResponse(asset_file)
