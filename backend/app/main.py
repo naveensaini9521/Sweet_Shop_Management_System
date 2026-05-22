@@ -22,7 +22,12 @@ app = FastAPI(
 # CORS middleware - IMPORTANT for development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:8000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:8000",
+        "https://sweet-shop.onrender.com",
+        "https://sweet-shop-management-system.onrender.com"
+    ], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
