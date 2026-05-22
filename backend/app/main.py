@@ -35,15 +35,14 @@ app.add_middleware(
 )
 
 # Path to your React build
-REACT_BUILD_PATH = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+REACT_BUILD_PATH = Path(__file__).resolve().parent.parent / "frontend_dist"
 
 # Serve React static files
 if REACT_BUILD_PATH.exists():
     logger.info(f"Serving React app from: {REACT_BUILD_PATH}")
     
     # Mount static files
-    app.mount("/static", StaticFiles(directory=REACT_BUILD_PATH / "static"), name="static")
-    
+    app.mount("/assets", StaticFiles(directory=REACT_BUILD_PATH / "assets"), name="assets")    
     # Serve index.html for root
     @app.get("/")
     async def serve_react_app():
