@@ -5,7 +5,6 @@ from fastapi.responses import FileResponse, JSONResponse
 from pathlib import Path
 from app.api.v1 import auth, sweets, inventory
 import logging
-import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -19,7 +18,7 @@ app = FastAPI(
     openapi_url="/api/openapi.json"
 )
 
-# CORS middleware - IMPORTANT for development
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -27,66 +26,84 @@ app.add_middleware(
         "http://localhost:8000",
         "https://sweet-shop.onrender.com",
         "https://sweet-shop-management-system.onrender.com"
-    ], 
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["*"]
 )
 
-# Path to your React build
+# React Build Path
 REACT_BUILD_PATH = Path(__file__).resolve().parent.parent / "frontend_dist"
 
-# Serve React static files
+# Serve React Frontend
 if REACT_BUILD_PATH.exists():
     logger.info(f"Serving React app from: {REACT_BUILD_PATH}")
-    
-    # Mount static files
-    app.mount("/assets", StaticFiles(directory=REACT_BUILD_PATH / "assets"), name="assets")    
-    # Serve index.html for root
+
+    # Mount Vite assets folder
+    app.mount(
+        "/assets",
+        StaticFiles(directory=REACT_BUILD_PATH / "assets"),
+        name="assets"
+    )
+
+    # Root Route
     @app.get("/")
     async def serve_react_app():
         return FileResponse(REACT_BUILD_PATH / "index.html")
-    
-    # Catch-all for React Router
-    @app.get("/{full_path:path}")
-    async def serve_react_path(request: Request, full_path: str):
-        # Check if it's an API call
-        if full_path.startswith("api/"):
-            # Let API routes handle it (they won't reach here due to prefix)
-            return JSONResponse(status_code=404, content={"detail": f"API endpoint not found: {full_path}"}
-            )
-        
-        # Check if it's a static file
-        static_file = REACT_BUILD_PATH / full_path
-        if static_file.exists() and static_file.is_file():
-            return FileResponse(static_file)
-        
-        # Check for files in static directory
-        static_subpath = REACT_BUILD_PATH / "static" / full_path
-        if static_subpath.exists() and static_subpath.is_file():
-            return FileResponse(static_subpath)
-        
-        # Default to index.html for React Router
-        return FileResponse(REACT_BUILD_PATH / "index.html")
-else:
-    logger.warning(f"React build not found at {REACT_BUILD_PATH}")
-    
-    @app.get("/")
-    def root():
-        return {"message": "Sweet Shop Management System API running"}
 
-# API endpoints
+    # React Router Catch-All
+    @app.get("/{full_path:path}")
+    async def serve_react_routes(request: Request, full_path: str):
+
+        # Ignore API routes
+        if full_path.startswith("api/"):
+            return JSONResponse(
+                status_code=404,
+                content={"detail": f"API endpoint not found: {full_path}"}
+            )
+
+        # Serve direct files if they exist
+        requested_file = REACT_BUILD_PATH / full_path
+
+        if requested_file.exists() and requested_file.is_file():
+            return FileResponse(requested_file)
+
+        # Serve assets files
+        asset_file = REACT_BUILD_PATH / "assets" / full_path
+
+        if asset_file.exists() and asset_file.is_file():
+            return FileResponse(asset_file)
+
+        # Fallback to index.html for React Router
+        return FileResponse(REACT_BUILD_PATH / "index.html")
+
+else:
+    logger.warning(f"React build not found at: {REACT_BUILD_PATH}")
+
+    @app.get("/")
+    async def root():
+        return {
+            "message": "Sweet Shop Management System API running"
+        }
+
+# API Routes
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(sweets.router, prefix="/api/sweets", tags=["sweets"])
 app.include_router(inventory.router, prefix="/api/inventory", tags=["inventory"])
 
-# Health checks
+# Health Check
 @app.get("/health")
-def health_check():
-    return {"status": "healthy", "service": "sweet-shop-api"}
+async def health_check():
+    return {
+        "status": "healthy",
+        "service": "sweet-shop-api"
+    }
 
 @app.get("/api/health")
-def api_health_check():
-    return {"status": "healthy", "service": "sweet-shop-api", "version": "1.0.0"}
-
+async def api_health_check():
+    return {
+        "status": "healthy",
+        "service": "sweet-shop-api",
+        "version": "1.0.0"
+    }
